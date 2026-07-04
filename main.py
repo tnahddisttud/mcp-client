@@ -6,15 +6,18 @@ from langchain.agents import create_agent
 from langgraph.checkpoint.memory import InMemorySaver
 
 load_dotenv()
-
+import os
 
 async def main():
+    token = os.getenv("MCP_AUTH_TOKEN", "admin-token-123")
     client = MultiServerMCPClient(
         {
             "hrms": {
-                "transport": "stdio",
-                "command": "python",
-                "args": ["D:\\projects\\hr-assist\\server.py"],
+                "transport": "http",
+                "url": "http://localhost:8080/mcp",
+                "headers": {
+                    "Authorization": f"Bearer {token}"
+                }
             }
         }
     )

@@ -1,6 +1,5 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
-import os
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from dotenv import load_dotenv
@@ -9,16 +8,14 @@ from langchain_mcp_adapters.client import MultiServerMCPClient
 from langchain.agents import create_agent
 from langgraph.checkpoint.memory import InMemorySaver
 
-load_dotenv()
+load_dotenv()import os
 
 MCP_SERVERS = {
     "hrms": {
-        "transport": "stdio",
-        "command": "python",
-        "args": ["D:\\projects\\hr-assist\\server.py"],
-        "env": {
-            "CB_EMAIL": os.getenv("CB_EMAIL"),
-            "CB_EMAIL_PWD": os.getenv("CB_EMAIL_PWD")
+        "transport": "http",
+        "url": "http://localhost:8080/mcp",
+        "headers": {
+            "Authorization": f"Bearer {os.getenv('MCP_AUTH_TOKEN', 'admin-token-123')}"
         }
     }
 }
