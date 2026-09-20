@@ -15,11 +15,7 @@ MCP_SERVERS = {
     "hrms": {
         "transport": "stdio",
         "command": "python",
-        "args": ["D:\\projects\\hr-assist\\server.py"],
-        "env": {
-            "CB_EMAIL": os.getenv("CB_EMAIL"),
-            "CB_EMAIL_PWD": os.getenv("CB_EMAIL_PWD")
-        }
+        "args": ["D:\\projects\\hr-assist\\server.py"]
     }
 }
 
